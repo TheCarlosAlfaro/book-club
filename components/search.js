@@ -8,7 +8,8 @@ export default function Search() {
   const [active, setActive] = useState(false);
   const [results, setResults] = useState([]);
 
-  const searchEndpoint = (query) => `/api/search?q=${query}`;
+  const searchEndpoint = (query) =>
+    `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
 
   const onChange = useCallback((event) => {
     const query = event.target.value;
@@ -42,7 +43,7 @@ export default function Search() {
         className={styles.search}
         onChange={onChange}
         onFocus={onFocus}
-        placeholder="Search Books"
+        placeholder="Example Search"
         type="text"
         value={query}
       />
