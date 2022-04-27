@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
@@ -7,10 +7,6 @@ import Search from '../components/search';
 export default function Home({ books, googleBooksApiKey }) {
   const [formInputs, setFormInputs] = useState();
   const [searchResults, setSearchResults] = useState([]);
-
-  useEffect(() => {
-    setSearchResults([]);
-  }, [books]);
 
   const handleInputs = (event) => {
     let { name, value } = event.target;
