@@ -4,7 +4,7 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import Search from '../components/search';
 
-export default function Home({ books, googleBooksApiKey }) {
+export default function Home({ googleBooksApiKey }) {
   const [formInputs, setFormInputs] = useState();
   const [searchResults, setSearchResults] = useState([]);
 
@@ -42,9 +42,8 @@ export default function Home({ books, googleBooksApiKey }) {
 
 export const getStaticProps = async () => {
   const googleBooksApiKey = process.env.GOOGLE_BOOKS_API_KEY;
-  const books = {};
 
   return {
-    props: { books, googleBooksApiKey },
+    props: { googleBooksApiKey },
   };
 };
