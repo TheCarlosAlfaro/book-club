@@ -19,14 +19,14 @@ export default function Search({ search, handleInputs, searchResults }) {
       </form>
       {searchResults.length > 0 && (
         <div className="giphy-search-results-grid">
-          {searchResults.map((each, index) => {
+          {searchResults.map((book, index) => {
             return (
               <div key={index}>
-                <h3>{each.volumeInfo.title}</h3>
-                {each.volumeInfo.imageLinks ? (
+                <h3>{book.volumeInfo.title}</h3>
+                {book.volumeInfo.imageLinks ? (
                   <Image
-                    src={each.volumeInfo.imageLinks.thumbnail}
-                    alt={each.title}
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt={book.title}
                     width={96}
                     height={128}
                   />
