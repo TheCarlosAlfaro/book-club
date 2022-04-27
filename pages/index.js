@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import styles from '../components/search.module.css';
+import Image from 'next/image';
 
 export default function Home({ books, googleBooksApiKey }) {
   const [formInputs, setFormInputs] = useState();
@@ -53,9 +54,11 @@ export default function Home({ books, googleBooksApiKey }) {
                   <div key={index}>
                     <h3>{each.volumeInfo.title}</h3>
                     {each.volumeInfo.imageLinks ? (
-                      <img
+                      <Image
                         src={each.volumeInfo.imageLinks.thumbnail}
                         alt={each.title}
+                        width={96}
+                        height={128}
                       />
                     ) : (
                       <p>no image found</p>
