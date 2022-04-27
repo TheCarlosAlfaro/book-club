@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import styles from '../components/search.module.css';
-import Image from 'next/image';
+import Search from '../components/search';
 
 export default function Home({ books, googleBooksApiKey }) {
   const [formInputs, setFormInputs] = useState();
@@ -35,40 +34,11 @@ export default function Home({ books, googleBooksApiKey }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Search</h2>
 
-        <div className={styles.container}>
-          <form onSubmit={search}>
-            <input
-              className={styles.search}
-              placeholder="Search by title or author"
-              name="searchTerm"
-              onChange={handleInputs}
-              type="text"
-              required
-            />
-            <button>Search</button>
-          </form>
-          {searchResults.length > 0 && (
-            <div className="giphy-search-results-grid">
-              {searchResults.map((each, index) => {
-                return (
-                  <div key={index}>
-                    <h3>{each.volumeInfo.title}</h3>
-                    {each.volumeInfo.imageLinks ? (
-                      <Image
-                        src={each.volumeInfo.imageLinks.thumbnail}
-                        alt={each.title}
-                        width={96}
-                        height={128}
-                      />
-                    ) : (
-                      <p>no image found</p>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+        <Search
+          search={search}
+          handleInputs={handleInputs}
+          searchResults={searchResults}
+        />
       </section>
     </Layout>
   );
