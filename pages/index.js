@@ -15,11 +15,9 @@ export default function Home({ googleBooksApiKey }) {
 
   const search = async (event) => {
     event.preventDefault();
-    let books = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${formInputs.searchTerm}&key=${googleBooksApiKey}`
-    );
+    let books = await fetch(`/api/v1/search/${formInputs.searchTerm}`);
     books = await books.json();
-    setSearchResults(books.items);
+    setSearchResults(books.results);
   };
 
   return (
@@ -39,11 +37,3 @@ export default function Home({ googleBooksApiKey }) {
     </Layout>
   );
 }
-
-export const getStaticProps = async () => {
-  const googleBooksApiKey = process.env.GOOGLE_BOOKS_API_KEY;
-
-  return {
-    props: { googleBooksApiKey },
-  };
-};
