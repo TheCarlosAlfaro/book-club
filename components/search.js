@@ -1,11 +1,26 @@
-import styles from './search.module.css';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import styles from './search.module.css';
 
-import React from 'react';
+export default function Search() {
+  const [formInputs, setFormInputs] = useState();
+  const [searchResults, setSearchResults] = useState([]);
 
-export default function Search({ search, handleInputs, searchResults }) {
+  const handleInputs = (event) => {
+    let { name, value } = event.target;
+    setFormInputs({ ...formInputs, [name]: value });
+  };
+
+  const search = async (event) => {
+    event.preventDefault();
+    let books = await fetch(`/api/v1/search/${formInputs.searchTerm}`);
+    books = await books.json();
+    setSearchResults(books.results);
+  };
+
   return (
     <div className={styles.container}>
+      <h3>Add a book you want to read</h3>
       <form onSubmit={search}>
         <input
           className={styles.search}

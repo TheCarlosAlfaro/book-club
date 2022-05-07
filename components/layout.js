@@ -25,6 +25,7 @@ export default function Layout({ children, home }) {
         {home ? (
           <>
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <p>Welcome to BookClub</p>
           </>
         ) : (
           <>

@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
 export default function Login() {
+  //state
   const [email, setEmail] = useState('');
   const [userMsg, setUserMsg] = useState('');
 
+  //variables
+  const router = useRouter();
+
+  // functions
   const onChangeEmail = (event) => {
     setUserMsg('');
     setEmail(event.target.value);
@@ -14,12 +20,15 @@ export default function Login() {
 
   const handleLoginWithEmail = (event) => {
     event.preventDefault();
-
     if (email) {
-      // TODO: login user
-      console.log('there is an email');
+      console.log('email');
+      if (email === 'hello@carlosalfaro.dev') {
+        console.log('Route to dashboard');
+        router.push('/');
+      } else {
+        setUserMsg('Something went wrong');
+      }
     } else {
-      // TODO: show user message
       setUserMsg('Enter a valid email address');
     }
   };
