@@ -1,36 +1,48 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
 export default function SignUp() {
-  //state
-  const [email, setEmail] = useState('');
-  const [userMsg, setUserMsg] = useState('');
-
-  //variables
-  const router = useRouter();
-
-  // functions
-  const onChangeEmail = (event) => {
-    setUserMsg('');
-    setEmail(event.target.value);
-  };
-
-  const handleLoginWithEmail = (event) => {
+  // Handles the submit event on form submit.
+  const handleSubmit = async (event) => {
+    // Stop the form from submitting and refreshing the page.
     event.preventDefault();
-    if (email) {
-      console.log('email');
-      if (email === 'hello@carlosalfaro.dev') {
-        console.log('Route to dashboard');
-        router.push('/');
-      } else {
-        setUserMsg('Something went wrong');
-      }
-    } else {
-      setUserMsg('Enter a valid email address');
-    }
+
+    // Get data from the form.
+    const data = {
+      first: event.target.first.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+    };
+
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(data);
+
+    // API endpoint where we send form data.
+    const endpoint = '/api/v1/users/signup';
+
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    };
+
+    // Send the form data to our forms API on Vercel and get a response.
+    const response = await fetch(endpoint, options);
+
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json();
+    console.log(`Is this your info?: ${result.data}`);
   };
 
   return (
@@ -42,14 +54,32 @@ export default function SignUp() {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <main>
           <div>
-            <h2 className={utilStyles.headingLg}>Sign Up</h2>
-            <input
-              type="text"
-              placeholder="Email address"
-              onChange={onChangeEmail}
-            />
-            <p className="user--message">{userMsg}</p>
-            <button onClick={handleLoginWithEmail}>Sign Up</button>
+            <h2 className={utilStyles.headingLg}>Sign Up and start reading</h2>
+            <p>
+              Track your books, receive recommendations, and browse book clubs
+            </p>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="first">First Name</label>
+                <input type="text" id="first" name="first" required />
+              </div>
+              <div>
+                <label htmlFor="last">Email address</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+
+              <div>
+                <label htmlFor="last">Password</label>
+                <input type="password" id="password" name="password" required />
+              </div>
+
+              <button type="submit">Sign Up</button>
+            </form>
+            <Link href="/signin">
+              <div>
+                Already have a Bookclubs account? <a>Sign in here.</a>
+              </div>
+            </Link>
           </div>
         </main>
       </section>
