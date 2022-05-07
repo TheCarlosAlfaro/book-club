@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
-export default function Login() {
+export default function SignIn() {
   //state
   const [email, setEmail] = useState('');
   const [userMsg, setUserMsg] = useState('');
@@ -42,14 +42,14 @@ export default function Login() {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <main>
           <div>
-            <h2 className={utilStyles.headingLg}>Signin</h2>
+            <h2 className={utilStyles.headingLg}>Sign In</h2>
             <input
               type="text"
               placeholder="Email address"
               onChange={onChangeEmail}
             />
             <p className="user--message">{userMsg}</p>
-            <button onClick={handleLoginWithEmail}>Signin</button>
+            <button onClick={handleLoginWithEmail}>Sign In</button>
           </div>
         </main>
       </section>
