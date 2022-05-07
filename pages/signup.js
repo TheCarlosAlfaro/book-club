@@ -75,11 +75,15 @@ export default function SignUp() {
 
               <button type="submit">Sign Up</button>
             </form>
-            <Link href="/signin">
-              <div>
-                Already have a Bookclubs account? <a>Sign in here.</a>
-              </div>
-            </Link>
+
+            <div>
+              <p>
+                Already have a Bookclubs account?{' '}
+                <Link href="/signin">
+                  <a>Sign in here.</a>
+                </Link>
+              </p>
+            </div>
           </div>
         </main>
       </section>
