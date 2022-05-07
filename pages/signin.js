@@ -6,33 +6,8 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
 export default function SignIn() {
-  //state
-  const [email, setEmail] = useState('');
-  const [userMsg, setUserMsg] = useState('');
-
-  //variables
   const router = useRouter();
 
-  // functions
-  const onChangeEmail = (event) => {
-    setUserMsg('');
-    setEmail(event.target.value);
-  };
-
-  const handleLoginWithEmail = (event) => {
-    event.preventDefault();
-    if (email) {
-      console.log('email');
-      if (email === 'hello@carlosalfaro.dev') {
-        console.log('Route to dashboard');
-        router.push('/');
-      } else {
-        setUserMsg('Something went wrong');
-      }
-    } else {
-      setUserMsg('Enter a valid email address');
-    }
-  };
   // Handles the submit event on form submit.
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.

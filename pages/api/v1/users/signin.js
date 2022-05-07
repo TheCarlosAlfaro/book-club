@@ -1,5 +1,10 @@
+import client from '../../../../lib/db';
+
 // /api/users/signin
-export default function signInHandler(req, res) {
+export default async function signInHandler(req, res) {
+  // const result = await client.query();
+  // console.log(result);
+
   // Get data submitted in request's body.
   const body = req.body;
 
